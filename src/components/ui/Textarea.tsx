@@ -42,7 +42,10 @@ export default function Textarea({
           border rounded-md shadow-sm
           placeholder-gray-400
           focus:outline-none focus:ring-2 focus:ring-offset-0
+          focus-visible:ring-2 focus-visible:ring-offset-0
           disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500
+          transition-colors duration-150
+          resize-y
           sm:text-sm
           ${
             error
@@ -56,6 +59,7 @@ export default function Textarea({
         aria-describedby={
           error ? `${textareaId}-error` : helperText ? `${textareaId}-helper` : undefined
         }
+        aria-required={props.required}
         maxLength={maxLength}
         value={value}
         {...props}

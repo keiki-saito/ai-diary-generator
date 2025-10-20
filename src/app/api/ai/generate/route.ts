@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@/lib/supabase/server';
 import { getAIService } from '@/lib/ai';
 import { ValidationError, AIGenerationError, AuthenticationError } from '@/types/errors';
+import { logError } from '@/lib/logger';
+import { validateUserInput, validateDate } from '@/lib/validation';
 import type { GenerateRequest, GenerateResponse, GenerateErrorResponse } from '@/types';
 
 /**
@@ -67,7 +69,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(successResponse, { status: 200 });
   } catch (error) {
-    console.error('Error in AI generation API:', error);
+    logError(error as Error, { context: 'AI generation API' });
 
     // エラータイプに応じたレスポンス
     if (error instanceof ValidationError) {
@@ -133,31 +135,16 @@ export async function POST(request: NextRequest) {
  * @returns エラーメッセージ、またはバリデーション成功時はnull
  */
 function validateRequest(body: GenerateRequest): string | null {
-  // userInputの存在チェック
-  if (!body.userInput || typeof body.userInput !== 'string') {
-    return 'userInputは必須です';
+  // userInputのバリデーション
+  const userInputResult = validateUserInput(body.userInput);
+  if (!userInputResult.isValid) {
+    return userInputResult.error;
   }
 
-  // userInputの文字数チェック（1文字以上）
-  if (body.userInput.trim().length < 1) {
-    return 'userInputは1文字以上である必要があります';
-  }
-
-  // dateの存在チェック
-  if (!body.date || typeof body.date !== 'string') {
-    return 'dateは必須です';
-  }
-
-  // dateの形式チェック（ISO 8601形式: YYYY-MM-DD）
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(body.date)) {
-    return 'dateはYYYY-MM-DD形式である必要があります';
-  }
-
-  // 有効な日付かチェック
-  const date = new Date(body.date);
-  if (isNaN(date.getTime())) {
-    return 'dateが有効な日付ではありません';
+  // dateのバリデーション
+  const dateResult = validateDate(body.date);
+  if (!dateResult.isValid) {
+    return dateResult.error;
   }
 
   return null;

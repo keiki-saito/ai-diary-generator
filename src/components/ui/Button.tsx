@@ -8,6 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: ButtonSize;
   isLoading?: boolean;
   children: React.ReactNode;
+  'aria-label'?: string;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -20,9 +21,9 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-base',
-  lg: 'px-6 py-3 text-lg',
+  sm: 'px-3 py-1.5 text-sm min-h-[36px]', // タッチ領域最小サイズ確保
+  md: 'px-4 py-2 text-base min-h-[44px]',  // iOS推奨タップ領域
+  lg: 'px-6 py-3 text-lg min-h-[48px]',
 };
 
 export default function Button({
@@ -32,6 +33,7 @@ export default function Button({
   disabled,
   children,
   className = '',
+  'aria-label': ariaLabel,
   ...props
 }: ButtonProps) {
   return (
@@ -41,13 +43,17 @@ export default function Button({
         font-medium rounded-md
         border border-transparent
         focus:outline-none focus:ring-2 focus:ring-offset-2
+        focus-visible:ring-2 focus-visible:ring-offset-2
         disabled:cursor-not-allowed disabled:opacity-50
-        transition-colors
+        transition-all duration-150
+        active:scale-95
         ${variantStyles[variant]}
         ${sizeStyles[size]}
         ${className}
       `}
       disabled={disabled || isLoading}
+      aria-label={ariaLabel}
+      aria-busy={isLoading}
       {...props}
     >
       {isLoading && (

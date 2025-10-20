@@ -33,10 +33,13 @@ export default function Input({
         id={inputId}
         className={`
           block w-full px-3 py-2
+          min-h-[44px]
           border rounded-md shadow-sm
           placeholder-gray-400
           focus:outline-none focus:ring-2 focus:ring-offset-0
+          focus-visible:ring-2 focus-visible:ring-offset-0
           disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500
+          transition-colors duration-150
           sm:text-sm
           ${
             error
@@ -50,6 +53,7 @@ export default function Input({
         aria-describedby={
           error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined
         }
+        aria-required={props.required}
         {...props}
       />
       {error && (

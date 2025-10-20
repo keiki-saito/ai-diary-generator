@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { generateDiaryPrompt } from './prompt';
 import { AIGenerationError } from '@/types/errors';
+import { logError, logInfo } from '@/lib/logger';
 import type { GenerateDiaryOptions, GenerateDiaryResult } from '@/types';
 
 /**
@@ -33,6 +34,11 @@ export class AIGenerationService {
   async generateDiary(options: GenerateDiaryOptions): Promise<GenerateDiaryResult> {
     const { userInput, date, maxTokens, temperature } = options;
 
+    logInfo('Starting AI diary generation', {
+      userInputLength: userInput.length,
+      date: date.toISOString(),
+    });
+
     // プロンプト生成
     const prompt = generateDiaryPrompt(userInput, date);
 
@@ -46,15 +52,18 @@ export class AIGenerationService {
       return result;
     } catch (error) {
       if (error instanceof AIGenerationError) {
+        logError(error as Error, { context: 'generateDiary' });
         throw error;
       }
 
       // その他のエラーをAIGenerationErrorでラップ
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      throw new AIGenerationError(
+      const wrappedError = new AIGenerationError(
         `Failed to generate diary: ${errorMessage}`,
         '日記の生成に失敗しました。しばらく時間をおいてから再度お試しください。'
       );
+      logError(wrappedError, { context: 'generateDiary', originalError: errorMessage });
+      throw wrappedError;
     }
   }
 
