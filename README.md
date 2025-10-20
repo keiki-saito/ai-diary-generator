@@ -115,6 +115,8 @@ src/
 ## セキュリティ機能
 
 - **認証**: Supabase Authによる安全な認証
+  - クライアント側で直接認証を実行（パスワードが平文でサーバーに送信されない）
+  - HTTPS経由でSupabaseに直接送信される
 - **Row Level Security**: データベースレベルでのアクセス制御
 - **XSS対策**: DOMPurifyによるHTMLサニタイズ
 - **CSRF対策**: SameSite Cookie属性の設定

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signUp } from '@/app/actions/auth';
+import { createBrowserClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -45,20 +45,29 @@ export default function SignUpForm() {
     }
 
     try {
-      const result = await signUp(email, password);
+      // クライアント側で直接Supabaseの認証APIを呼び出す
+      // パスワードはHTTPS経由でSupabaseに直接送信される（平文でサーバーに送らない）
+      const supabase = createBrowserClient();
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-      if (!result.success) {
-        setError(result.error);
-      } else {
-        setSuccess(true);
-        // 3秒後にログインページにリダイレクト
-        setTimeout(() => {
-          router.push('/login');
-        }, 3000);
+      if (signUpError) {
+        setError(signUpError.message);
+        setIsLoading(false);
+        return;
       }
+
+      setSuccess(true);
+      setIsLoading(false);
+
+      // 3秒後にログインページにリダイレクト
+      setTimeout(() => {
+        router.push('/login');
+      }, 3000);
     } catch {
       setError('予期しないエラーが発生しました');
-    } finally {
       setIsLoading(false);
     }
   };

@@ -1,21 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { signOut } from '@/app/actions/auth';
+import { usePathname, useRouter } from 'next/navigation';
+import { createBrowserClient } from '@/lib/supabase/client';
 import { useState } from 'react';
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignOut = async () => {
     setIsLoading(true);
     try {
-      await signOut();
+      // クライアント側で直接Supabaseのログアウトを実行
+      const supabase = createBrowserClient();
+      await supabase.auth.signOut();
+
+      // ログインページにリダイレクト
+      router.push('/login');
+      router.refresh();
     } catch {
-      // signOutはリダイレクトするので、このエラーは無視
-    } finally {
+      // エラーが発生してもログインページにリダイレクト
+      router.push('/login');
       setIsLoading(false);
     }
   };

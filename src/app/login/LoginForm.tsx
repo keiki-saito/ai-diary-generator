@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from '@/app/actions/auth';
+import { createBrowserClient } from '@/lib/supabase/client';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function LoginForm() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -35,15 +37,25 @@ export default function LoginForm() {
     }
 
     try {
-      const result = await signIn(email, password);
+      // クライアント側で直接Supabaseの認証APIを呼び出す
+      // パスワードはHTTPS経由でSupabaseに直接送信される（平文でサーバーに送らない）
+      const supabase = createBrowserClient();
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-      if (!result.success) {
-        setError(result.error);
+      if (signInError) {
+        setError(signInError.message);
+        setIsLoading(false);
+        return;
       }
-      // 成功時はリダイレクトされるため、ここには到達しない
+
+      // 成功時はリダイレクト
+      router.push('/diaries');
+      router.refresh();
     } catch {
       setError('予期しないエラーが発生しました');
-    } finally {
       setIsLoading(false);
     }
   };
