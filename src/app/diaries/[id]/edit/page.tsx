@@ -14,7 +14,7 @@ export default async function EditDiaryPage({
 
   try {
     diary = await getDiary(id);
-  } catch (error) {
+  } catch {
     redirect('/diaries');
   }
 

@@ -2,7 +2,6 @@ import {
   validateUserInput,
   validateDate,
   validateDiaryContent,
-  ValidationResult,
 } from '../validation';
 
 describe('Validation', () => {
@@ -44,14 +43,14 @@ describe('Validation', () => {
     });
 
     test('異常系: null', () => {
-      const result = validateUserInput(null as any);
+      const result = validateUserInput(null as unknown as string);
 
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('入力内容は文字列である必要があります');
     });
 
     test('異常系: undefined', () => {
-      const result = validateUserInput(undefined as any);
+      const result = validateUserInput(undefined as unknown as string);
 
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('入力内容は文字列である必要があります');
@@ -88,7 +87,7 @@ describe('Validation', () => {
     });
 
     test('異常系: null', () => {
-      const result = validateDate(null as any);
+      const result = validateDate(null as unknown as string);
 
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('日付は必須です');
@@ -140,7 +139,7 @@ describe('Validation', () => {
     });
 
     test('異常系: null', () => {
-      const result = validateDiaryContent(null as any);
+      const result = validateDiaryContent(null as unknown as string);
 
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('日記内容は文字列である必要があります');

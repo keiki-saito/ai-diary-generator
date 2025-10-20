@@ -2,8 +2,7 @@
 
 import { createServerClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { ValidationError, DatabaseError, AuthenticationError } from '@/types/errors';
+import { DatabaseError, AuthenticationError } from '@/types/errors';
 import type { ActionResult, DiaryCreateInput, DiaryUpdateInput } from '@/types';
 
 /**

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Input, Textarea, Button, Spinner, Card } from '@/components/ui';
+import { Input, Textarea, Button, Card } from '@/components/ui';
 import type { AIGenerationState } from '@/types';
 
 export interface DiaryEditorProps {
@@ -92,7 +92,7 @@ export default function DiaryEditor({
         content: data.content,
         error: null,
       });
-    } catch (error) {
+    } catch {
       clearInterval(timer);
       setAiState({
         status: 'error',

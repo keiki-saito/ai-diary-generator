@@ -56,7 +56,7 @@ export default function SignUpForm() {
           router.push('/login');
         }, 3000);
       }
-    } catch (err) {
+    } catch {
       setError('予期しないエラーが発生しました');
     } finally {
       setIsLoading(false);

@@ -19,7 +19,7 @@ describe('AIGenerationService', () => {
       messages: {
         create: mockCreate,
       },
-    } as any));
+    } as unknown as Anthropic));
 
     service = new AIGenerationService();
   });

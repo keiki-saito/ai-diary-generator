@@ -1,4 +1,4 @@
-import { getDiary, deleteDiary } from '@/app/actions/diary';
+import { getDiary } from '@/app/actions/diary';
 import { Button, Card } from '@/components/ui';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -15,7 +15,7 @@ export default async function DiaryDetailPage({
 
   try {
     diary = await getDiary(id);
-  } catch (error) {
+  } catch {
     // 日記が見つからない、または認証エラー
     redirect('/diaries');
   }

@@ -9,7 +9,7 @@ export default async function DiariesPage() {
 
   try {
     diaries = await getDiaries();
-  } catch (error) {
+  } catch {
     // 認証エラーの場合はログインページにリダイレクト
     redirect('/login');
   }

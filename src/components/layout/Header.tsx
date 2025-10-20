@@ -13,7 +13,7 @@ export default function Header() {
     setIsLoading(true);
     try {
       await signOut();
-    } catch (error) {
+    } catch {
       // signOutはリダイレクトするので、このエラーは無視
     } finally {
       setIsLoading(false);

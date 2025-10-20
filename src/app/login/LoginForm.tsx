@@ -41,7 +41,7 @@ export default function LoginForm() {
         setError(result.error);
       }
       // 成功時はリダイレクトされるため、ここには到達しない
-    } catch (err) {
+    } catch {
       setError('予期しないエラーが発生しました');
     } finally {
       setIsLoading(false);
