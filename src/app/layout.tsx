@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@/contexts/ThemeContext';
+import { Providers } from '@/components/providers/Providers';
 
 export const metadata: Metadata = {
   title: 'AI日記 - AI自動日記生成アプリ',
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
