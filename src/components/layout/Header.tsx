@@ -4,7 +4,17 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createBrowserClient } from '@/lib/supabase/client';
 import { useState } from 'react';
-import ThemeToggle from '@/components/ui/ThemeToggle';
+import dynamic from 'next/dynamic';
+
+// ThemeToggleを動的インポート（SSR無効化）
+const ThemeToggle = dynamic(() => import('@/components/ui/ThemeToggle'), {
+  ssr: false,
+  loading: () => (
+    <div className="p-2 w-9 h-9" aria-hidden="true">
+      {/* ローディング中のスペーサー */}
+    </div>
+  ),
+});
 
 export default function Header() {
   const pathname = usePathname();
