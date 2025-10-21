@@ -14,10 +14,10 @@ export default async function Home() {
       <div className="max-w-4xl mx-auto text-center space-y-8">
         {/* ヘッダー */}
         <div className="space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900">
             AI日記
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 px-4">
             少ない入力からAIがあなたの日記を自動生成
           </p>
         </div>
@@ -26,22 +26,22 @@ export default async function Home() {
         <div className="grid md:grid-cols-3 gap-6 py-8">
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <div className="text-4xl mb-3">✍️</div>
-            <h3 className="font-semibold text-lg mb-2">簡単入力</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="font-semibold text-xl mb-2 text-gray-900">簡単入力</h3>
+            <p className="text-gray-700 text-base leading-relaxed">
               今日の出来事を一言入力するだけ
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <div className="text-4xl mb-3">🤖</div>
-            <h3 className="font-semibold text-lg mb-2">AI自動生成</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="font-semibold text-xl mb-2 text-gray-900">AI自動生成</h3>
+            <p className="text-gray-700 text-base leading-relaxed">
               Claude Sonnet 4が豊かな日記を作成
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <div className="text-4xl mb-3">📚</div>
-            <h3 className="font-semibold text-lg mb-2">簡単管理</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="font-semibold text-xl mb-2 text-gray-900">簡単管理</h3>
+            <p className="text-gray-700 text-base leading-relaxed">
               過去の日記を一覧で振り返り
             </p>
           </div>
