@@ -48,7 +48,9 @@ export default function SignUpForm() {
       const supabase = createBrowserClient();
 
       // 確認メールのコールバックURLを設定
-      const redirectUrl = `${window.location.origin}/auth/callback`;
+      // 本番環境では環境変数を優先、なければ現在のoriginを使用
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
+      const redirectUrl = `${baseUrl}/auth/callback`;
 
       const { error: signUpError } = await supabase.auth.signUp({
         email,
