@@ -17,7 +17,8 @@ export default function Card({ children, className = '', padding = 'md' }: CardP
   return (
     <div
       className={`
-        bg-white rounded-lg shadow-md
+        bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50
+        transition-colors
         ${paddingStyles[padding]}
         ${className}
       `}
