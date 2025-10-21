@@ -5,9 +5,14 @@ import { useTheme } from '@/contexts/ThemeContext';
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
+  const handleClick = () => {
+    console.log('[ThemeToggle] ボタンクリック - 現在のテーマ:', theme);
+    toggleTheme();
+  };
+
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleClick}
       className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
       aria-label={theme === 'light' ? 'ダークモードに切り替え' : 'ライトモードに切り替え'}
     >
