@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { createServerClient } from '@/lib/supabase/server';
-import { Button } from '@/components/ui';
+import { Button, ThemeToggle } from '@/components/ui';
 
 export default async function Home() {
   // 認証状態を確認
@@ -11,6 +11,11 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors">
+      {/* テーマ切り替えボタン - 右上固定 */}
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       <div className="max-w-4xl mx-auto text-center space-y-8">
         {/* ヘッダー */}
         <div className="space-y-4">

@@ -48,7 +48,7 @@ export default function Header() {
           <div className="flex">
             {/* ロゴ */}
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/diaries" className="text-xl font-bold text-primary-600 dark:text-primary-400">
+              <Link href="/" className="text-xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors">
                 AI日記
               </Link>
             </div>
