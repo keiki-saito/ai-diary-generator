@@ -1,9 +1,25 @@
 'use client';
 
 import { useTheme } from '@/contexts/ThemeContext';
+import { useState, useEffect } from 'react';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // クライアントサイドでのみレンダリング
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // サーバーサイドまたはマウント前は何も表示しない
+  if (!mounted) {
+    return (
+      <div className="p-2 w-9 h-9" aria-hidden="true">
+        {/* スペーサー */}
+      </div>
+    );
+  }
 
   return (
     <button
