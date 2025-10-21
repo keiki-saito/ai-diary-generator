@@ -46,11 +46,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  // クライアントサイドでマウントされるまで何も表示しない（ハイドレーションエラー防止）
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // 常にProviderでラップして、コンテキストを提供
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}

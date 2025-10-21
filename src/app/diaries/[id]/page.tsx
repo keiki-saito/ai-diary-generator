@@ -28,13 +28,13 @@ export default async function DiaryDetailPage({
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-4xl mx-auto">
         {/* ヘッダー */}
         <div className="mb-6">
           <Link
             href="/diaries"
-            className="text-sm text-gray-600 hover:text-gray-900 flex items-center"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 flex items-center"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -55,12 +55,12 @@ export default async function DiaryDetailPage({
 
         <Card>
           {/* 日付とアクションボタン */}
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
             <div>
-              <time className="text-2xl font-bold text-gray-900">
+              <time className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {formattedDate}
               </time>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                 作成日: {diary.created_at.toLocaleDateString('ja-JP')}
               </p>
             </div>
@@ -74,11 +74,11 @@ export default async function DiaryDetailPage({
 
           {/* ユーザー入力 */}
           {diary.user_input && (
-            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">
+            <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 メモ
               </h3>
-              <p className="text-gray-600 whitespace-pre-wrap">
+              <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
                 {diary.user_input}
               </p>
             </div>
@@ -86,15 +86,15 @@ export default async function DiaryDetailPage({
 
           {/* 日記本文 */}
           <div className="prose prose-sm max-w-none">
-            <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
+            <div className="whitespace-pre-wrap text-gray-800 dark:text-gray-200 leading-relaxed">
               {diary.content}
             </div>
           </div>
 
           {/* 更新日時 */}
           {diary.updated_at.getTime() !== diary.created_at.getTime() && (
-            <div className="mt-6 pt-4 border-t border-gray-200">
-              <p className="text-xs text-gray-500">
+            <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
                 最終更新: {diary.updated_at.toLocaleString('ja-JP')}
               </p>
             </div>
