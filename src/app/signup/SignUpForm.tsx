@@ -52,6 +52,11 @@ export default function SignUpForm() {
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
       const redirectUrl = `${baseUrl}/auth/callback`;
 
+      console.log('[SignUp] NEXT_PUBLIC_APP_URL:', process.env.NEXT_PUBLIC_APP_URL);
+      console.log('[SignUp] window.location.origin:', window.location.origin);
+      console.log('[SignUp] baseUrl:', baseUrl);
+      console.log('[SignUp] redirectUrl:', redirectUrl);
+
       const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
