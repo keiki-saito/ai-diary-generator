@@ -81,8 +81,8 @@ export default function SignUpForm() {
 
   if (success) {
     return (
-      <div className="rounded-md bg-green-50 p-4">
-        <div className="text-sm text-green-700">
+      <div className="rounded-md bg-green-50 dark:bg-green-900/30 p-4">
+        <div className="text-sm text-green-700 dark:text-green-400">
           <p className="font-medium">アカウントが作成されました！</p>
           <p className="mt-2">
             確認メールを送信しました。メールに記載されたリンクをクリックしてアカウントを有効化してください。
@@ -98,8 +98,8 @@ export default function SignUpForm() {
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       {error && (
-        <div className="rounded-md bg-red-50 p-4">
-          <div className="text-sm text-red-700">{error}</div>
+        <div className="rounded-md bg-red-50 dark:bg-red-900/30 p-4">
+          <div className="text-sm text-red-700 dark:text-red-400">{error}</div>
         </div>
       )}
 
@@ -114,7 +114,7 @@ export default function SignUpForm() {
             type="email"
             autoComplete="email"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm transition-colors"
             placeholder="メールアドレス"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -131,7 +131,7 @@ export default function SignUpForm() {
             type="password"
             autoComplete="new-password"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm transition-colors"
             placeholder="パスワード（6文字以上）"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -148,7 +148,7 @@ export default function SignUpForm() {
             type="password"
             autoComplete="new-password"
             required
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm transition-colors"
             placeholder="パスワード（確認）"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -161,7 +161,7 @@ export default function SignUpForm() {
         <div className="text-sm">
           <Link
             href="/login"
-            className="font-medium text-primary-600 hover:text-primary-500"
+            className="font-medium text-primary-600 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-300"
           >
             既にアカウントをお持ちの方
           </Link>
@@ -172,7 +172,7 @@ export default function SignUpForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 dark:bg-primary-500 hover:bg-primary-700 dark:hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? '登録中...' : 'アカウントを作成'}
         </button>

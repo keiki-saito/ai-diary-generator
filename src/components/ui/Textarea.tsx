@@ -30,7 +30,7 @@ export default function Textarea({
       {label && (
         <label
           htmlFor={textareaId}
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
         >
           {label}
         </label>
@@ -40,17 +40,19 @@ export default function Textarea({
         className={`
           block w-full px-3 py-2
           border rounded-md shadow-sm
-          placeholder-gray-400
+          bg-white dark:bg-gray-800
+          text-gray-900 dark:text-gray-100
+          placeholder-gray-400 dark:placeholder-gray-500
           focus:outline-none focus:ring-2 focus:ring-offset-0
           focus-visible:ring-2 focus-visible:ring-offset-0
-          disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500
+          disabled:bg-gray-100 dark:disabled:bg-gray-900 disabled:cursor-not-allowed disabled:text-gray-500 dark:disabled:text-gray-600
           transition-colors duration-150
           resize-y
           sm:text-sm
           ${
             error
-              ? 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500'
-              : 'border-gray-300 focus:ring-primary-500 focus:border-primary-500'
+              ? 'border-red-300 dark:border-red-700 text-red-900 dark:text-red-300 focus:ring-red-500 focus:border-red-500'
+              : 'border-gray-300 dark:border-gray-600 focus:ring-primary-500 focus:border-primary-500'
           }
           ${className}
         `}
@@ -67,18 +69,18 @@ export default function Textarea({
       <div className="mt-1 flex justify-between items-center">
         <div className="flex-1">
           {error && (
-            <p className="text-sm text-red-600" id={`${textareaId}-error`}>
+            <p className="text-sm text-red-600 dark:text-red-400" id={`${textareaId}-error`}>
               {error}
             </p>
           )}
           {!error && helperText && (
-            <p className="text-sm text-gray-500" id={`${textareaId}-helper`}>
+            <p className="text-sm text-gray-500 dark:text-gray-400" id={`${textareaId}-helper`}>
               {helperText}
             </p>
           )}
         </div>
         {showCharCount && (
-          <p className="text-sm text-gray-500 ml-2">
+          <p className="text-sm text-gray-500 dark:text-gray-400 ml-2">
             {charCount}
             {maxLength && `/${maxLength}`}
           </p>

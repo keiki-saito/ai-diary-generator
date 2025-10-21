@@ -15,11 +15,11 @@ export default async function DiariesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">日記一覧</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">日記一覧</h1>
           <Link href="/diaries/new">
             <Button>新規作成</Button>
           </Link>
@@ -28,10 +28,10 @@ export default async function DiariesPage() {
         {/* 日記一覧 */}
         {diaries.length === 0 ? (
           // 空状態
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-12 text-center transition-colors">
             <div className="max-w-md mx-auto space-y-4">
               <svg
-                className="mx-auto h-12 w-12 text-gray-400"
+                className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -43,10 +43,10 @@ export default async function DiariesPage() {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                 まだ日記がありません
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 最初の日記を作成して、あなたの日々を記録しましょう
               </p>
               <div className="pt-4">
