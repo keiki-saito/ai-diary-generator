@@ -3,10 +3,8 @@
 import { useState } from 'react';
 import { createBrowserClient } from '@/lib/supabase/client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function SignUpForm() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -48,9 +46,16 @@ export default function SignUpForm() {
       // クライアント側で直接Supabaseの認証APIを呼び出す
       // パスワードはHTTPS経由でSupabaseに直接送信される（平文でサーバーに送らない）
       const supabase = createBrowserClient();
+
+      // 確認メールのコールバックURLを設定
+      const redirectUrl = `${window.location.origin}/auth/callback`;
+
       const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: redirectUrl,
+        },
       });
 
       if (signUpError) {
@@ -61,11 +66,6 @@ export default function SignUpForm() {
 
       setSuccess(true);
       setIsLoading(false);
-
-      // 3秒後にログインページにリダイレクト
-      setTimeout(() => {
-        router.push('/login');
-      }, 3000);
     } catch {
       setError('予期しないエラーが発生しました');
       setIsLoading(false);
@@ -80,7 +80,9 @@ export default function SignUpForm() {
           <p className="mt-2">
             確認メールを送信しました。メールに記載されたリンクをクリックしてアカウントを有効化してください。
           </p>
-          <p className="mt-2 text-xs">3秒後にログインページにリダイレクトします...</p>
+          <p className="mt-2">
+            メールが届かない場合は、迷惑メールフォルダをご確認ください。
+          </p>
         </div>
       </div>
     );

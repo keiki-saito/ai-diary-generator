@@ -44,6 +44,7 @@ export async function middleware(request: NextRequest) {
   const isProtectedPage =
     !request.nextUrl.pathname.startsWith('/login') &&
     !request.nextUrl.pathname.startsWith('/signup') &&
+    !request.nextUrl.pathname.startsWith('/auth/callback') &&
     request.nextUrl.pathname !== '/';
 
   // 未認証ユーザーが保護されたページにアクセスしようとした場合

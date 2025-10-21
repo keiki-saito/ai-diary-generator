@@ -74,7 +74,25 @@ supabase db push
 
 または、Supabase Studioで\`supabase/migrations/20250101000000_create_diaries_table.sql\`の内容を手動で実行。
 
-### 4. 開発サーバーの起動
+### 4. Supabase認証設定（メール確認）
+
+メール確認機能を使用するために、リダイレクトURLを設定します。
+
+**ローカル開発:**
+- Supabase Localを使用する場合、特別な設定は不要です
+- メールは \`http://localhost:54324\` のInbucketで確認できます
+
+**本番環境:**
+1. Supabase Dashboard > Authentication > URL Configuration を開く
+2. 以下のリダイレクトURLを追加:
+   \`\`\`
+   https://your-app.vercel.app/auth/callback
+   https://your-app.vercel.app/**
+   \`\`\`
+
+詳細は [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md) を参照してください。
+
+### 5. 開発サーバーの起動
 
 \`\`\`bash
 npm run dev
